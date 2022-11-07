@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block metadescription %}
+                    welcome
+{% endblock %}
+{% block title %}
+    Search
+{% endblock %}
+{% block content %}
+<div>
+    <p class="text-center search_text">You Have Searched For : <b>"{{query}}"</b></p>
+</div>
+<div class="container">
+  <div class="row mx-auto">
+      {% for product in product %}
+      <div class="my_bottom_margin col-9 col-sm-12 col-md-4 col-md-12 col-lg-4 ">
+        <div class="card text-center" style="min-width:18rem;">
+          <a href="{{product.get_url}}"><img src="{{product.image.url}}" alt="{{product.name}}" width="250px" height="250px"></a>
+          <div>
+            <h4>{{product.name}}</h4>
+            <p><b>Price :- ₹{{product.price}}</b></p>
+          </div>
+        </div>
+      </div>
+      {% empty %}
+      <div>
+      <p class="text-center search_text">0 Results Found</p>
+      </div>
+      {% endfor %}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block metadescription %}
+    {% if category %}
+        {{category.description|truncatewords:155}}
+    {% else %}
+        Welcome to ABC store where you can buys different items....
+    {% endif %}
+{% endblock %}
+{% block title %}
+    {% if category %}
+          {{category.name}} - ABC Store
+    {% else %}
+          CASA VALLEY
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+{% if category %}
+    <div>
+      <div class="row my_row_class">
+          <div class="mx-auto">
+              <p><a href="{% url 'ecartapp:allprocat' %}">Our all product collections</a></p>
+          </div>
+      </div>
+    </div>
+{% endif %}
+<div class="mx-auto">
+    {% if category %}
+        <img class="my_image" src="{{category.image.url}}" alt="{{category.name}}" width="100%" height="400px">
+</div>
+    <br>
+<div>
+        <h1 class="text-center my_title">{{category.name}}</h1>
+        <p class="text-justify"> {{category.description}}</p>
+</div>
+    {% else %}
+<div class="banner_container">
+  <img class="my_image my_image_padding" src="{% static 'img/banne.png' %}" alt="our products" width="100%" height="350px">
+    <div class="centered">CASA SPICES PVT.LTD</div>
+</div>
+  <br>
+<div>
+        <h1 class="text-center my_title">Our Product collection</h1
+        <p class="text-justify">spicesOnline.com is a first-of-its-kind online spice store conceived by a team of management professionals with decades of domain knowledge. Also, passion for promoting healthy and qualitative spices – the natural and traditional way is the driving force behind this venture.
+spicesonline.com is India’s first online spices store. With over 40 major types of spices that are used to cook, you will find everything you are looking for as a tastemaker. Choose from a wide range of options in spices, exclusively handpicked to help you find the best quality available at the lowest prices. It is from the land of spices like Udumbumchola Taluk and Peermadu Taluk of the Idukki district of Kerala. Kumily, Vandanmedu, Thekkady, Munnar, and Kattappana are the major places of spice production in Kerala.
+Kerala spices online spices store is an online seller for high-quality spices like cardamom, Pepper, Nutmeg, Clove, tea, coffee, etc. Here you will be able to buy export quality spices at low prices as collected directly from the farmers at Kumily(Thekkady), Kattappana, and Nedumkandam which are the land of spices. Here we offer all kinds of masalas that can add taste to your favorite dishes and food. We guarantee on-time delivery and the best quality because we are from the land of spices in Kerala!</p>
+</div>
+    {% endif %}
+<div class="container">
+  <div class="row mx-auto">
+      {% for product in products.object_list %}
+      <div class="my_bottom_margin col-9 col-sm-12 col-md-4 col-md-12 col-lg-4 ">
+        <div class="card text-center" style="min-width:18rem;">
+          <a href="{{product.get_url}}"><img src="{{product.image.url}}" alt="{{product.name}}" width="250px" height="250px"></a>
+          <div>
+            <h4 class="pro_title">{{product.name}}</h4>
+            <p><b>Price :- ₹{{product.price}}</b></p>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+  </div>
+    <div class="mx-auto">
+        {% if products.paginator.num_pages > 1 %}
+        <hr>
+        <div class="text-center">
+            {% for pg in products.paginator.page_range %}
+                <a href="?page={{pg}}" class="btn btn-light btn-sm {% if products.number  == pg %} active {% endif %}">{{pg}}</a>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
