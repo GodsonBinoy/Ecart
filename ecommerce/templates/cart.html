@@ -29,9 +29,9 @@ This is the cart page.Proceed to review your items and place your orders.
         </h1>
         <br>
     </div>
-</div>
+
 <div>
-    <div class="mx-auto">
+    <div class="row mx-auto">
         <div class="col-12 col-sm-12 col-md-12 col-lg-6">
             <table class="table my_table">
                 <thead class="my_custom_thead">
@@ -61,14 +61,14 @@ This is the cart page.Proceed to review your items and place your orders.
                     </td>
                     {% if cart_item.quantity < cart_item.product.stock %}
                     <td>
-                        &nbsp;<a href="{% url 'cart:add_cart'    cart_item.product.id %}" class="custom_a"><i class="fa fa-plus-square custom_icon">+</i></a>
-                        &nbsp;<a href="{% url 'cart:cart_remove' cart_item.product.id %}" class="custom_a"><i class="fa fa-minus-square custom_icon">-</i></a>
-                        &nbsp;<a href="{% url 'cart:full_remove' cart_item.product.id %}" class="custom_icon"><i class="fa-solid fa-trash-can"></i>0</a>
+                        &nbsp;<a href="{% url 'cart:add_cart'    cart_item.product.id %}" class="custom_a"><i class="fa fa-plus-square custom_icon"></i></a>
+                        &nbsp;<a href="{% url 'cart:cart_remove' cart_item.product.id %}" class="custom_a"><i class="fa fa-minus-square custom_icon"></i></a>
+                        &nbsp;<a href="{% url 'cart:full_remove' cart_item.product.id %}" class="custom_icon"><i class="fa fa-trash custom_icon"></i></a>
                     </td>
                     {% else %}
                     <td>
                         &nbsp;<a href="{% url 'cart:cart_remove' cart_item.product.id %}" class="custom_a"><i class="fa fa-minus-square custom_icon"></i></i></a>
-                        &nbsp;<a href="{% url 'cart:full_remove' cart_item.product.id %}" class="custom_icon"><i class="fa fa-trash-square custom_icon"></i></a>
+                        &nbsp;<a href="{% url 'cart:full_remove' cart_item.product.id %}" class="custom_icon"><i class="fa fa-trash custom_icon"></i></a>
                     </td>
                     {% endif %}
                 </tr>
@@ -103,7 +103,8 @@ This is the cart page.Proceed to review your items and place your orders.
     <a href="{% url 'ecartapp:allprocat' %}" class="btn btn-secondary btn-block my_custom_button">Continue Shopping</a>
 </div>
 </div>
-    </div>
+</div>
+</div>
 </div>
 {% endif %}
 {% endblock %}
